@@ -1,14 +1,6 @@
 import React from "react";
-import { mockUrls } from "~/data";
 import Image from "next/image";
 import { db } from "~/server/db";
-
-export const dynamic = "force-dynamic";
-
-const mockImages = mockUrls.map((url, index) => ({
-  id: index,
-  url,
-}));
 
 const Posts = async () => {
   const posts = await db.query.posts.findMany({
@@ -27,7 +19,9 @@ const Posts = async () => {
               alt={"post"}
               className={"w-48"}
             />
-            {post.name}
+            <p>{post.name}</p>
+            <p>{post.title}</p>
+            <p>{post.content}</p>
           </div>
         ))}
       </div>

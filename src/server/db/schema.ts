@@ -6,6 +6,7 @@ import {
   index,
   pgTableCreator,
   serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -23,6 +24,8 @@ export const posts = createTable(
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }).notNull(),
+    title: text("title").default("No title").notNull(),
+    content: text("content").default("No content").notNull(),
     imgUrl: varchar("img_url", { length: 1024 }).notNull(),
     createdAt: timestamp("created", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
