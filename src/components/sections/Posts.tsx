@@ -3,6 +3,8 @@ import { mockUrls } from "~/data";
 import Image from "next/image";
 import { db } from "~/server/db";
 
+export const dynamic = "force-dynamic";
+
 const mockImages = mockUrls.map((url, index) => ({
   id: index,
   url,
