@@ -11,25 +11,24 @@ const mockImages = mockUrls.map((url, index) => ({
 }));
 
 const Posts = async () => {
-  const posts = await db.query.posts.findMany();
+  const posts = await db.query.posts.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
 
   return (
     <section className={"w-full"}>
-      <div className={"flex gap-5"}>
-        {posts.map((post) => (
-          <div key={post.id}>{post.name}</div>
-        ))}
-      </div>
       <div className={"flex flex-wrap gap-4"}>
-        {mockImages.map((image) => (
-          <Image
-            width={960}
-            height={960}
-            src={image.url}
-            alt={"post"}
-            key={image.id}
-            className={"w-48"}
-          />
+        {posts.map((post) => (
+          <div key={post.id} className={"flex flex-col gap-2"}>
+            <Image
+              width={960}
+              height={960}
+              src={post.imgUrl}
+              alt={"post"}
+              className={"w-48"}
+            />
+            {post.name}
+          </div>
         ))}
       </div>
     </section>

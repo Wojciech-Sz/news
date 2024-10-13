@@ -19,18 +19,19 @@ import {
 export const createTable = pgTableCreator((name) => `news_${name}`);
 
 export const posts = createTable(
-  "post",
+  "posts",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at", { withTimezone: true })
+    name: varchar("name", { length: 256 }).notNull(),
+    imgUrl: varchar("img_url", { length: 1024 }).notNull(),
+    createdAt: timestamp("created", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
 );
