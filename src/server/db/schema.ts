@@ -27,6 +27,7 @@ export const posts = createTable(
     title: text("title").default("No title").notNull(),
     content: text("content").default("No content").notNull(),
     imgUrl: varchar("img_url", { length: 1024 }).notNull(),
+    className: varchar("class_name", { length: 256 }),
     createdAt: timestamp("created", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),

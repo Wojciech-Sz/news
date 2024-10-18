@@ -11,3 +11,10 @@
 
 @layer base {
 }
+
+@layer utilities {
+  /*  Hero */
+  .hero {
+    @apply relative flex h-[clamp(40vh,50svh,50vh)] w-full items-end justify-center overflow-hidden px-5 sm:px-10;
+  }
+}

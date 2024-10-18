@@ -6,9 +6,11 @@ export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (
-    <main className="">
+    <>
       <Hero />
-      <Posts />
-    </main>
+      <div className={"w-full max-w-7xl px-5 sm:px-10"}>
+        <Posts />
+      </div>
+    </>
   );
 }
