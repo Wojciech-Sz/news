@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <div className={"grid min-h-screen grid-rows-[auto_1fr_auto]"}>
           <Header />
-          <main className={"flex flex-col items-center gap-5 sm:gap-10"}>
+          <main className={"flex flex-col items-center gap-10 sm:gap-20"}>
             {children}
           </main>
           <Footer />

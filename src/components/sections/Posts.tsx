@@ -1,23 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import { getPosts } from "~/server/queries";
+import Link from "next/link";
 
 const Posts = async () => {
   const posts = await getPosts();
+
   return (
     <section className={"flex w-full flex-col gap-5"}>
-      <h2 className={"text-3xl/none font-bold tracking-tight lg:text-4xl/none"}>
-        Aktualności
-      </h2>
+      <h2 className={"section-title"}>Aktualności</h2>
       <div
         className={
-          "grid h-screen w-full grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 lg:grid-cols-3"
+          "grid h-[150vh] min-h-[800px] w-full grid-flow-row grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 lg:grid-cols-3"
         }
       >
-        {posts.map((post) => (
-          <div
+        {posts.map((post, i) => (
+          <Link
+            href={`/post/${post.id}`}
+            prefetch={false}
             key={post.id}
-            className={`group relative ${post.className} size-full overflow-hidden rounded-md`}
+            className={`group relative ${i === 0 ? "post-1" : i === 5 ? "post-5" : i === 4 ? "order-last" : ""} size-full overflow-hidden rounded-md`}
           >
             <Image
               width={960}
@@ -46,7 +48,7 @@ const Posts = async () => {
                 {post.title}
               </h3>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

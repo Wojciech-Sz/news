@@ -49,7 +49,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className={"hero h-[83vh]"}>
+    <section className={"hero"}>
       <div id="hero" className="absolute -top-16" />
       {heroImages.map((image, i) => (
         <Image

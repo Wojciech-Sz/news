@@ -17,6 +17,7 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
+
 export const createTable = pgTableCreator((name) => `news_${name}`);
 
 export const posts = createTable(
@@ -27,7 +28,6 @@ export const posts = createTable(
     title: text("title").default("No title").notNull(),
     content: text("content").default("No content").notNull(),
     imgUrl: varchar("img_url", { length: 1024 }).notNull(),
-    className: varchar("class_name", { length: 256 }),
     createdAt: timestamp("created", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -37,5 +37,23 @@ export const posts = createTable(
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
+  }),
+);
+
+export const postContent = createTable(
+  "postContent",
+  {
+    id: serial("id").primaryKey(),
+    postId: serial("post_id").references(() => posts.id),
+    content: text("content").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (example) => ({
+    // Add any additional indexes or constraints here
   }),
 );
