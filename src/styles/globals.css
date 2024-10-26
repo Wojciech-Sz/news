@@ -86,12 +86,8 @@
 }
 
 /*  Posts */
-.post-1 {
-  @apply col-span-2 row-span-2;
-}
-
-.post-5 {
-  @apply col-span-2 row-span-2;
+.post-span-2 {
+  @apply lg:col-span-2 lg:row-span-2;
 }
 
 /*  Team  */

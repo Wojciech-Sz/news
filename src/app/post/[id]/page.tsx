@@ -2,7 +2,8 @@ import React from "react";
 import { getPost, getPostContent } from "~/server/queries";
 import Image from "next/image";
 
-const PostPage = async ({ params }: { params: { id: number } }) => {
+const PostPage = async (props: { params: Promise<{ id: number }> }) => {
+  const params = await props.params;
   const content = await getPostContent(params.id);
   const post = await getPost(params.id);
 

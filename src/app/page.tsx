@@ -5,12 +5,17 @@ import Team from "~/components/sections/Team";
 
 export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: { page: string };
+}) {
+  const { page } = await searchParams;
   return (
     <>
       <Hero />
       <div className={"flex w-full max-w-7xl flex-col gap-20 px-5 sm:px-10"}>
-        <Posts />
+        <Posts page={page} />
         <Team />
       </div>
     </>
