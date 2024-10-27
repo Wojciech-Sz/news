@@ -1,3 +1,36 @@
+import { FacebookIcon, InstagramIcon } from "src/components/icons";
+
+export const headerLinks = [
+  {
+    id: 1,
+    name: "Home",
+    href: "/",
+  },
+  {
+    id: 2,
+    name: "Aktualności",
+    href: "/#posts",
+  },
+  {
+    id: 3,
+    name: "Zespół",
+    href: "/#team",
+  },
+];
+
+export const socialLinks = [
+  {
+    id: 1,
+    icon: <FacebookIcon />,
+    href: "https://facebook.com",
+  },
+  {
+    id: 2,
+    icon: <InstagramIcon />,
+    href: "https://instagram.com",
+  },
+];
+
 export const heroImages = [
   {
     id: "heroImage-1",

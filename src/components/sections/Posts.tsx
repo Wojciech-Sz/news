@@ -14,20 +14,20 @@ import {
 } from "~/components/ui/pagination";
 import { cn } from "~/lib/utils";
 
-const Posts = async ({ page }: { page: string }) => {
+const Posts = async ({ page = "1" }: { page: string }) => {
   const currentPage = Number(page);
   const posts = await getPosts(currentPage || 1);
   const postsCount = await getPostsCount();
   const totalPages = Math.ceil((postsCount[0]?.count ?? 6) / 6);
 
   return (
-    <section className={"relative flex w-full flex-col gap-5"}>
+    <section className={"section"}>
       <div id={"posts"} className={"absolute -top-16"} />
       <h2 className={"section-title"}>Aktualności</h2>
-      <div className={"flex flex-col items-center"}>
+      <div className={"flex flex-col items-center gap-5"}>
         <div
           className={cn(
-            "grid h-[150vh] min-h-[800px] w-full grid-flow-row grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 lg:grid-cols-3",
+            "posts-grid",
             posts.length < 4 ? "h-[75vh] min-h-[400px] grid-rows-2" : "",
           )}
         >
@@ -36,7 +36,7 @@ const Posts = async ({ page }: { page: string }) => {
               href={`/post/${post.id}`}
               prefetch={false}
               key={post.id}
-              className={`group relative ${i === 0 ? "post-span-2" : i === 5 ? "post-span-2" : i === 4 ? "order-last" : ""} size-full overflow-hidden rounded-md`}
+              className={`group relative ${i === 0 ? "post-span-3" : i === 5 ? "post-span-3" : i === 4 ? "post-span-2 order-last" : "post-span-2"} size-full overflow-hidden rounded-md`}
             >
               <Image
                 width={960}

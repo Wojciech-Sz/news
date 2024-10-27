@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer
       className={
-        "flex h-max w-full items-center justify-between bg-green-700 px-5 py-10"
+        "flex h-max w-full items-center justify-between bg-primary px-5 py-10 text-primary-foreground"
       }
     >
       <h2>Logo</h2>

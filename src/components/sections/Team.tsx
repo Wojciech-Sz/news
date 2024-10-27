@@ -5,9 +5,12 @@ import Image from "next/image";
 
 const Team = () => {
   return (
-    <section className={"flex w-full flex-col gap-5"}>
+    <section className={"section"}>
+      <div id={"team"} className={"absolute -top-16"} />
       <h2 className={"section-title"}>Nasz zespół</h2>
-      <div className={"flex w-full flex-wrap gap-10"}>
+      <div
+        className={"flex w-full flex-wrap items-center justify-center gap-10"}
+      >
         {team.map((member) => (
           <div key={member.id} className={"flex flex-col"}>
             <Image

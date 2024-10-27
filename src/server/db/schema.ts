@@ -44,7 +44,9 @@ export const postContent = createTable(
   "postContent",
   {
     id: serial("id").primaryKey(),
-    postId: serial("post_id").references(() => posts.id),
+    postId: serial("post_id")
+      .references(() => posts.id)
+      .notNull(),
     content: text("content").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { heroImages } from "~/data";
@@ -9,11 +9,35 @@ import { heroImages } from "~/data";
 gsap.registerPlugin(useGSAP);
 
 const Hero = () => {
-  const tl = gsap.timeline({
-    repeat: -1,
-  });
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = heroImages.map((image) => {
+        return new Promise((resolve, reject) => {
+          const img = new window.Image();
+          img.src = image.url;
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error("Failed to load images:", error);
+      }
+    };
+
+    void preloadImages();
+  }, []);
 
   useGSAP(() => {
+    if (!imagesLoaded) return;
+
+    const tl = gsap.timeline({ repeat: -1 });
+
     heroImages.forEach((image, i) => {
       tl.to(
         `#${image.id}`,
@@ -46,7 +70,11 @@ const Hero = () => {
           scale: 1,
         });
     });
-  }, []);
+  }, [imagesLoaded]);
+
+  if (!imagesLoaded) {
+    return <div className="h-screen bg-gray-200" />;
+  }
 
   return (
     <section className={"hero"}>
@@ -61,7 +89,7 @@ const Hero = () => {
           title="Hero image"
           width={1920}
           height={1080}
-          className={`absolute inset-x-0 size-full object-cover object-center ${
+          className={`absolute inset-x-0 h-full w-full object-cover object-center ${
             i !== 0 ? "opacity-0" : ""
           }`}
         />
